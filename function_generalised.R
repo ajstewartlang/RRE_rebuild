@@ -37,8 +37,14 @@ rebuild <- function (x,u,y) {
   #rbind the 2018 paper scores with legacy paper scores
   temp <- rbind (temp, old_papers_data)
   
+  #generate list of multiples
+  mult <- is.na(temp$Multiples)
+  multiples <- temp[!mult,]
+  
   #save data frame with new scores and legacy scores to a new .csv file
+  #also save separate file containing outputs submitted more than once
   write_excel_csv(temp, "Combined RRE.csv")
+  write_excel_csv(multiples, "Multiples.csv")
 }
 
 #call the function with UoA4 RRE parameters
